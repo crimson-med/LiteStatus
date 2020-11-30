@@ -16,7 +16,7 @@ module.exports = {
     },
     output: {
         // Define the package name
-        library: 'pixiumPackage',
+        library: 'LiteStatus',
         libraryTarget: 'umd',
         globalObject: 'this',
         filename: 'bundle.js',

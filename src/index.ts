@@ -1,56 +1,54 @@
-/**
- * Say hello world in the console
- */
-export const PixiumHello = () => {
-    console.log(`hello world`)
+interface Status {
+    online: boolean
+    info: string
 }
 
-/**
- * Creates a pixium class and calls constructor
- * @param employeeName - The employee name to specify when creating a class
- */
-export class Pixium {
-    employeeName: string
-    foundDiv: boolean
-    nextIndex: number
-    colors: string[]
-    constructor(employeeName: string) {
-        // Define the employee name
-        this.employeeName = employeeName
-        // Greet the employee
-        console.log(`Welcome employee ${this.employeeName}`)
-        // Try to find the pixiumBanner element
-        const pixiumBanner = document.getElementById("pixiumBanner");
-        // Set a field if we found it
-        this.foundDiv = (pixiumBanner) ? true : false
-        // If we found it
-        if (this.foundDiv) {
-            // Set the inner text
-            document.getElementById("pixiumBanner").innerText = "Pixium Digital Pte Ltd";
-            // Set the initial color index
-            this.nextIndex = 1
-            // Define our color array
-            this.colors = ["#7549f9", "#7549f9", "#9b0005;", "#2bc4a0"]
-            // Call our change color function
-            this.changeColor()
-        }
-    }
+interface DivParam {
+    content?: string
+    classes?: string | string[]
+}
 
-    /**
-     * Display a red console.log banner
-     */
-    banner = () => {
-        console.log("%cPixium Digital Pte Ltd", "color: red;");
+export class WeekGraph {
+    data: Status[]
+    source: HTMLElement
+    foundSource: boolean = false
+    constructor(data: Status[], source: string) {
+        console.log(`loaded constructor`)
+        try {
+            console.log(`trying to find source`)
+            const sourceElement = document.getElementById(source);
+            this.foundSource = (sourceElement) ? true : false
+            if (this.foundSource) {
+                console.log(`source was found`)
+                this.source = sourceElement
+            }
+        } catch (error) {
+            console.log(`Could not locate source`)
+            return null
+        }
+        const wrappingDiv = createDiv({ classes: "flex" })
+        data.map(element => {
+            const dayInfo = createDiv({ content: element.info, classes: "info" })
+            const day = createDiv({ classes: ["day", (element.online) ? "online" : "offline"] })
+            day.append(dayInfo)
+            wrappingDiv.append(day)
+        })
+        this.source.append(wrappingDiv)
     }
-    /**
-     * Dynamically change the color of the text in the div
-     */
-    changeColor = () => {
-        setInterval(() => {
-            // Change the color
-            document.getElementById("pixiumBanner").style.color = this.colors[this.nextIndex];
-            // Get the next index
-            this.nextIndex = (this.nextIndex + 1) % this.colors.length
-        }, 500)
+}
+
+
+
+function createDiv(divParam: DivParam) {
+    let workingDiv = document.createElement('div');
+    if (divParam && divParam.content) {
+        workingDiv.textContent = divParam.content
     }
+    if (divParam && divParam.classes && Array.isArray(divParam.classes)) {
+        workingDiv.setAttribute('class', divParam.classes.join(" "));
+    }
+    if (divParam && divParam.classes && typeof divParam.classes === "string") {
+        workingDiv.setAttribute('class', divParam.classes);
+    }
+    return workingDiv
 }

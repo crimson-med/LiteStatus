@@ -1,8 +1,6 @@
-# Typescript Webpackage Boilerplate
+# Lite Status
 
- In this boilerplate we have a simple look at a very basic typescript package exported for the web.
-
-We leverage the use of webpack to expose our package to the browser. 
+to define...
 
 # Installation 
 
@@ -18,8 +16,6 @@ yarn
 yarn start
 ```
 
-This will start webpack to compile the library on changes. 
-This will also start snowpack which will update the index.html in test once the library from webpack has been compiled
 # Build
 
 ```

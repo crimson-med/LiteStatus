@@ -1,54 +1,123 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Webpack Packages</title>
-    <style>
-      body {
-        margin: 0;
-        min-height: 100vh;
-        background: rgb(255, 255, 255);
-        font-family: sans-serif;
-      }
-      .header {
-        padding: 20px;
-      }
-      h1 {
-        margin: 0;
-        color: #9b0005;
-      }
-      .body {
-        padding: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="header">
-      <h1>Welcome to Pixium</h1>
-    </div>
-    <div class="body">
-      <h2>Introduction</h2>
-      <p>
-        In this example we have a simple look at a very basic typescript package
-        exported for the web.
-      </p>
-      <p>
-        We leverage the use of webpack to expose our package to the browser.
-      </p>
-      <h2>Getting Started</h2>
-      <p>To get started modify the code present in <b>src/index.ts</b></p>
-      <p>
-        To edit the package name modify the <b>webpack.config.js</b> more
-        precisly the <b>output --> library</b> field
-      </p>
-      <div id="pixiumBanner"></div>
-    </div>
 
-    <script src="./dist/bundle.js"></script>
-    <script>
-      pixiumPackage.PixiumHello();
-      const test = new pixiumPackage.Pixium("Mederic");
-      test.banner();
-    </script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <title>Lite Status Showcase</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: rgb(255, 255, 255);
+      font-family: sans-serif;
+    }
+
+    .header {
+      padding: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      color: #9b0005;
+    }
+
+    .body {
+      padding: 20px;
+    }
+  </style>
+  <style>
+    .flex {
+      width: 200px;
+      height: 20px;
+      background-color: white;
+      border: solid thin #e1e1e1;
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    .day {
+      max-width: 20px;
+      min-width: 5px;
+      flex: 1;
+      position: relative;
+    }
+
+    .online {
+      background-color: #9ac89a;
+      border-top: solid #5d975d;
+    }
+
+    .offline {
+      background-color: #f7948f;
+      border-top: solid #bf6c6c;
+    }
+
+    .day .info {
+      visibility: hidden;
+      width: 120px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      font-family: sans-serif;
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+
+    }
+
+    .day:hover .info {
+      visibility: visible;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>Lite Status Show Case</h1>
+  </div>
+  <div class="body">
+    <h2>Week Graph</h2>
+    <div id="lite-status"></div>
+    <!--<div class="flex">
+      <div class="day online">
+        <div class="info">4 / 10 / 20</div>
+      </div>
+      <div class="day online">
+        <div class="info">5 / 10 / 20</div>
+      </div>
+      <div class="day online">
+        <div class="info">6 / 10 / 20</div>
+      </div>
+      <div class="day offline">
+        <div class="info">7 / 10 / 20</div>
+      </div>
+      <div class="day offline">
+        <div class="info">8 / 10 / 20</div>
+      </div>
+      <div class="day online">
+        <div class="info">9 / 10 / 20</div>
+      </div>
+      <div class="day online">
+        <div class="info">10 / 10 / 20</div>
+      </div>
+    </div>-->
+  </div>
+
+  <script src="./dist/bundle.js"></script>
+  <script>
+    const payload = [
+      { online: true, info: "12 / 10 / 20" },
+      { online: false, info: "13 / 10 / 20" },
+      { online: true, info: "14 / 10 / 20" },
+      { online: true, info: "15 / 10 / 20" },
+      { online: false, info: "16 / 10 / 20" },
+      { online: false, info: "17 / 10 / 20" },
+      { online: true, info: "18 / 10 / 20" },
+    ]
+    const test = LiteStatus.WeekGraph(payload, "lite-status")
+  </script>
+</body>
+
 </html>
