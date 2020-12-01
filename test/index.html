@@ -26,13 +26,16 @@
     }
   </style>
   <style>
-    .flex {
+    .week-graph {
       width: 200px;
       height: 20px;
-      background-color: white;
-      border: solid thin #e1e1e1;
+      background-color: transparent;
       display: flex;
       justify-content: space-evenly;
+    }
+
+    .week-graph.border {
+      border: solid thin #e1e1e1;
     }
 
     .day {
@@ -44,11 +47,17 @@
 
     .online {
       background-color: #9ac89a;
+    }
+
+    .online.border {
       border-top: solid #5d975d;
     }
 
     .offline {
       background-color: #f7948f;
+    }
+
+    .offline.border {
       border-top: solid #bf6c6c;
     }
 
@@ -116,7 +125,10 @@
       { online: false, info: "17 / 10 / 20" },
       { online: true, info: "18 / 10 / 20" },
     ]
-    const test = LiteStatus.WeekGraph(payload, "lite-status")
+    const test = LiteStatus.WeekGraph(payload, "lite-status", {
+      internalBorder: false,
+      externalBorder: false
+    })
   </script>
 </body>
 

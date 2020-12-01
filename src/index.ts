@@ -3,6 +3,17 @@ interface Status {
     info: string
 }
 
+interface WeekGraphConfig {
+    externalBorder: boolean
+    internalBorder: boolean
+}
+
+const defaultWeekConfig: WeekGraphConfig = {
+    externalBorder: true,
+    internalBorder: true
+}
+
+
 interface DivParam {
     content?: string
     classes?: string | string[]
@@ -12,10 +23,14 @@ export class WeekGraph {
     data: Status[]
     source: HTMLElement
     foundSource: boolean = false
-    constructor(data: Status[], source: string) {
-        console.log(`loaded constructor`)
+    currentConfig: WeekGraphConfig
+    constructor(data: Status[], source: string, configWeekGraph: WeekGraphConfig | null = null) {
+        if (configWeekGraph && configWeekGraph !== null) {
+            this.currentConfig = { ...defaultWeekConfig, ...configWeekGraph }
+        } else {
+            this.currentConfig = defaultWeekConfig
+        }
         try {
-            console.log(`trying to find source`)
             const sourceElement = document.getElementById(source);
             this.foundSource = (sourceElement) ? true : false
             if (this.foundSource) {
@@ -26,10 +41,10 @@ export class WeekGraph {
             console.log(`Could not locate source`)
             return null
         }
-        const wrappingDiv = createDiv({ classes: "flex" })
+        const wrappingDiv = createDiv({ classes: ["week-graph", (this.currentConfig.externalBorder) ? "border" : ""] })
         data.map(element => {
             const dayInfo = createDiv({ content: element.info, classes: "info" })
-            const day = createDiv({ classes: ["day", (element.online) ? "online" : "offline"] })
+            const day = createDiv({ classes: ["day", (element.online) ? "online" : "offline", (this.currentConfig.internalBorder) ? "border" : ""] })
             day.append(dayInfo)
             wrappingDiv.append(day)
         })
