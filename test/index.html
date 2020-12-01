@@ -63,7 +63,6 @@
 
     .day .info {
       visibility: hidden;
-      width: 120px;
       background-color: rgba(0, 0, 0, 0.8);
       color: #fff;
       text-align: center;
@@ -73,11 +72,36 @@
       /* Position the tooltip */
       position: absolute;
       z-index: 1;
+      margin-top: 10px;
+      margin-left: 5px;
+      width: 70px;
+      font-size: small;
 
     }
 
     .day:hover .info {
       visibility: visible;
+    }
+
+    .calendar {
+      display: flex;
+      flex-direction: column;
+      min-height: 100px;
+    }
+
+    .week {
+      flex: 1;
+      display: flex;
+    }
+
+    .weekday {
+      flex: 1;
+      background-color: teal;
+      max-width: 20px;
+      max-height: 20px;
+      min-width: 20px;
+      min-height: 20px;
+      margin: 2px;
     }
   </style>
 </head>
@@ -89,6 +113,55 @@
   <div class="body">
     <h2>Week Graph</h2>
     <div id="lite-status"></div>
+    <h2>Month Graph</h2>
+
+    <div class="calendar">
+      <div class="week">
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+      </div>
+      <div class="week">
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+      </div>
+      <div class="week">
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+      </div>
+      <div class="week">
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+      </div>
+      <div class="week">
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+        <div class="weekday"></div>
+      </div>
+    </div>
     <!--<div class="flex">
       <div class="day online">
         <div class="info">4 / 10 / 20</div>
@@ -129,6 +202,9 @@
       internalBorder: false,
       externalBorder: false
     })
+    const now = new Date()
+    console.log(now.getMonth())
+    console.log(LiteStatus.getDaysInMonth(now.getMonth(), now.getFullYear()))
   </script>
 </body>
 
