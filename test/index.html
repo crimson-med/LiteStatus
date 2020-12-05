@@ -61,6 +61,8 @@
       border-top: solid #bf6c6c;
     }
 
+
+
     .day .info {
       visibility: hidden;
       background-color: rgba(0, 0, 0, 0.8);
@@ -96,12 +98,23 @@
 
     .weekday {
       flex: 1;
-      background-color: teal;
       max-width: 20px;
       max-height: 20px;
       min-width: 20px;
       min-height: 20px;
       margin: 2px;
+    }
+
+    .weekday.disabled {
+      background-color: rgb(180, 180, 180);
+    }
+
+    .disabled.border {
+      border-top: solid grey;
+    }
+
+    .weekday.online {
+      background-color: #9ac89a;
     }
   </style>
 </head>
@@ -114,53 +127,8 @@
     <h2>Week Graph</h2>
     <div id="lite-status"></div>
     <h2>Month Graph</h2>
+    <div id="month-status">
 
-    <div class="calendar">
-      <div class="week">
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-      </div>
-      <div class="week">
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-      </div>
-      <div class="week">
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-      </div>
-      <div class="week">
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-      </div>
-      <div class="week">
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-        <div class="weekday"></div>
-      </div>
     </div>
     <!--<div class="flex">
       <div class="day online">
@@ -203,8 +171,14 @@
       externalBorder: false
     })
     const now = new Date()
-    console.log(now.getMonth())
-    console.log(LiteStatus.getDaysInMonth(now.getMonth(), now.getFullYear()))
+    let payload2 = []
+    const allDays = LiteStatus.getDaysInMonth(now.getMonth(), now.getFullYear())
+    for (let index = 0; index < allDays.length; index++) {
+      const element = allDays[index];
+      payload2.push({ online: Math.random() < 0.5, info: element.toDateString(), date: element })
+    }
+    console.log(payload2)
+    const monthlyGraph = new LiteStatus.MonthGraph(payload2, "month-status")
   </script>
 </body>
 
